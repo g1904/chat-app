@@ -1,0 +1,21 @@
+{
+  "name": "chat-app",
+  "version": "0.0.1",
+  "description": "cs300 chat app",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "start npm install --prefix ./frontend && start npm install --prefix ./backend",
+    "start": "start npm start --prefix ./backend && start npm start --prefix ./frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g1904/chat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g1904/chat-app/issues"
+  },
+  "homepage": "https://github.com/g1904/chat-app#readme"
+}
