@@ -2,7 +2,6 @@ import React from "react";
 import makeToast from "../Toaster";
 import axios from "axios";
 import { withRouter, NavLink } from "react-router-dom";
-//import "../styles/common.css";
 
 const LoginPage = (props) => {
     const emailRef = React.createRef();
@@ -39,14 +38,14 @@ const LoginPage = (props) => {
             <div className="cardBody">
                 <div className="inputGroup">
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" ref={emailRef}/>
+                    <input type="email" name="email" id="email" placeholder="Email Address" ref={emailRef}/>
                 </div>
                 <div className="inputGroup">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" ref={passwordRef}/>
+                    <input type="password" name="password" id="password" placeholder="Your Password" ref={passwordRef}/>
                 </div>
                 <button onClick={loginUser}>Login</button>
-                <button style={{marginTop:1+'em'}}><NavLink to="/register">Register</NavLink></button>
+                <button style={{marginTop:1+'em'}}><NavLink to="/register">Go Register</NavLink></button>
             </div>
         </div>
     );

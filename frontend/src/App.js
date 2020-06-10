@@ -5,7 +5,6 @@ import RegisterPage from "./Pages/RegisterPage";
 import DashboardPage from "./Pages/DashboardPage";
 import IndexPage from "./Pages/IndexPage";
 import ChatroomPage from "./Pages/ChatroomPage";
-// import createRoomPage from "./Pages/createRoomPage";
 import io from "socket.io-client";
 import makeToast from "./Toaster";
 
@@ -44,10 +43,22 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" component={IndexPage} exact />
-        <Route path="/login" component={LoginPage} exact />
+        <Route
+          path="/login"
+          render={() => <LoginPage setupSocket={setupSocket} />}
+          exact
+        />
         <Route path="/register" component={RegisterPage} exact />
-        <Route path="/dashboard" component={DashboardPage} exact />
-        <Route path="/chatroom/:id" component={ChatroomPage} exact />
+        <Route
+          path="/dashboard"
+          render={() => <DashboardPage socket={socket} />}
+          exact
+        />
+        <Route
+          path="/chatroom/:id"
+          render={() => <ChatroomPage socket={socket} />}
+          exact
+        />
       </Switch>
     </BrowserRouter>
   );

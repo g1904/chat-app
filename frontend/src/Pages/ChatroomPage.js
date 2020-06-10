@@ -1,19 +1,61 @@
 import React from "react";
+import axios from "axios";
 import { withRouter } from "react-router-dom";
-//import "../styles/common.css";
 
 const ChatroomPage = ({ match, socket }) => {
   const chatroomId = match.params.id;
   const [messages, setMessages] = React.useState([]);
   const messageRef = React.useRef();
   const [userId, setUserId] = React.useState("");
+  var chatName;
 
+  class history extends React.Component {
+
+    state = {
+      old: []
+    }
+
+    componentDidMount = () => {
+      axios.post("http://localhost:8000/chatroom", {
+        Authorization: "Bearer " + localStorage.getItem("CC_Token"),
+        ChatID: chatroomId,
+      })
+      .then((response) => {
+        this.setState({old: response.History});
+        chatName = response.Chatname;
+      }).catch((err) =>{setTimeout(this.componentDidMount, 3000)});
+    };
+
+
+    render() {
+      return (
+        <div className="message">
+          {this.state.old.forEach(element => {
+            if (socket) {
+              socket.emit("chatroomMessage", {
+                chatroomId,
+                message: element.message,
+              });
+            }
+          })}
+        </div>
+      )
+    }
+
+}
   const sendMessage = () => {
     if (socket) {
       socket.emit("chatroomMessage", {
         chatroomId,
         message: messageRef.current.value,
       });
+
+      axios.put("http://localhost:8000/chatroom", {
+          Authorization: "Bearer " + localStorage.getItem("CC_Token"),
+          ChatID: chatroomId,
+          Message: messageRef.current.value
+        });
+      
 
       messageRef.current.value = "";
     }
@@ -52,11 +94,13 @@ const ChatroomPage = ({ match, socket }) => {
     //eslint-disable-next-line
   }, []);
 
+
   return (
     <div className="chatroomPage">
       <div className="chatroomSection">
-        <div className="cardHeader">Chatroom Name</div>
+        <div className="cardHeader">ChatRoom</div>
         <div className="chatroomContent">
+          <history/>
           {messages.map((message, i) => (
             <div key={i} className="message">
               <span

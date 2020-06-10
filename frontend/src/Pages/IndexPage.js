@@ -1,5 +1,4 @@
 import React from "react";
-//import "../styles/common.css";
 
 const IndexPage = (props) => {
   React.useEffect(() => {

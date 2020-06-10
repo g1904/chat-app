@@ -4,7 +4,8 @@ const chatroomController = require("../controllers/chatroomController");
 
 const auth = require("../middlerwares/auth");
 
-//router.put("", auth, catchErrors(chatroomController.getAllChatrooms));
+router.delete("", auth, catchErrors(chatroomController.deleteChat));
+router.put("", auth, catchErrors(chatroomController.put));
 router.post("", auth, catchErrors(chatroomController.post));
 
 module.exports = router;
