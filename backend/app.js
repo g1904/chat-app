@@ -1,12 +1,10 @@
 const express = require("express");
-
 const app = express();
+// Setup Cross Origin
+app.use(require("cors")());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
-// Setup Cross Origin
-app.use(require("cors")());
 
 // Bring in routes
 app.use("/user", require("./routes/user"));

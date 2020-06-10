@@ -17,6 +17,7 @@ const LoginPage = (props) => {
                 password,
             }).then((response) => {
                 makeToast("success", response.data.message);
+                localStorage.setItem("Email", email);
                 localStorage.setItem("CC_Token", response.data.token);
                 props.history.push("/dashboard");
                 props.setupSocket();

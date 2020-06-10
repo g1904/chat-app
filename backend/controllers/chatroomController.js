@@ -3,6 +3,14 @@ const Chatroom = mongoose.model("Chatroom");
 const User = mongoose.model("User");
 const jwt = require("jwt-then");
 
+exports.post = async(req, res) => {
+    if (req.body.Chatname && req.body.Users) {
+        this.createChatroom(req, res);
+    } else {
+        this.getAllChatrooms(req, res);
+    }
+}
+
 exports.createChatroom = async(req, res) => {
     // console.log(req);
     const {Authorization, Chatname, Users} = req.body;
@@ -42,8 +50,8 @@ exports.getAllChatrooms = async(req, res) => {
 /*
 exports.newMessage = async(req, res) => {
     console.log(req);
-    const name = req.body.Chatname;
-    const users = req.body.Users;
+    const name = 
+    const users = 
     const userExists = await User.findOne(users);
     if (!userExists) throw "User with this email address does not exist.";
 
